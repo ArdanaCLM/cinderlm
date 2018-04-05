@@ -127,7 +127,7 @@ class CinderLMScan(checks.AgentCheck):
     )
 
     # command args to be used for all calls to shell commands
-    COMMAND_ARGS = ['/usr/local/bin/cinder_diag', '--json']
+    COMMAND_ARGS = ['/usr/bin/cinder_diag', '--json']
     COMMAND_TIMEOUT = 15.0
     SUBCOMMAND_PREFIX = '--'
 
