@@ -1,6 +1,6 @@
 #
 # (c) Copyright 2015,2016 Hewlett Packard Enterprise Development LP
-# (c) Copyright 2017 SUSE LLC
+# (c) Copyright 2017-2018 SUSE LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -127,7 +127,7 @@ class CinderLMScan(checks.AgentCheck):
     )
 
     # command args to be used for all calls to shell commands
-    COMMAND_ARGS = ['/usr/local/bin/cinder_diag', '--json']
+    COMMAND_ARGS = ['/usr/bin/cinder_diag', '--json']
     COMMAND_TIMEOUT = 15.0
     SUBCOMMAND_PREFIX = '--'
 
