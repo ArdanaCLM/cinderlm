@@ -1,0 +1,4 @@
+requirements.txt
+MANIFEST.in
+.gitignore
+tests/rings/samples/*

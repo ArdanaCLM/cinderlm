@@ -1,0 +1,6 @@
+exclude .gitignore
+exclude .gitreview
+
+include requirements.txt
+include test-requirements.txt
+include LICENSE
