@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # (c) Copyright 2015-2106 Hewlett Packard Enterprise Development LP
-# (c) Copyright 2017 SUSE LLC
+# (c) Copyright 2017-2018 SUSE LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -51,7 +51,7 @@ def create_arguments(parser):
                              help='CA cert file for TLS/SSL')
     client_args.add_argument(
         '--auth_url',
-        default='http://standard-ccp-vip-KEY-API-mgmt:35357/v2.0',
+        default='http://standard-ccp-vip-KEY-API-mgmt:35357/v3',
         help='auth_url')
     client_args.add_argument('-V', '--api-version', dest="api_version",
                              default="1", type=str,
