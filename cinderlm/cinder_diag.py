@@ -24,7 +24,7 @@ import json
 import os
 import re
 import socket
-from swiftlm.hp_hardware import hpssacli
+from swiftlm.hp_hardware import ssacli
 from swiftlm.utils.values import Severity
 import sys
 import time
@@ -71,7 +71,11 @@ def create_arguments(parser):
                              help='Do a check on cinder backend capacity')
     client_args.add_argument('--hpssacli', dest='hpssacli',
                              default=False, action='store_true',
-                             help='Check local disk devices')
+                             help='(deprecated) Check local disk devices. '
+                                  'Use --ssacli instead.')
+    client_args.add_argument('--ssacli', dest='ssacli',
+                             default=False, action='store_true',
+                             help='Check local disk devices.')
 
 
 def metric(name, value, dimensions, timestamp):
@@ -129,22 +133,22 @@ def check_cinder_processes():
     return results
 
 
-def check_hpssacli():
+def check_ssacli():
     """GET local smart array status
 
-       Wrap swiftlm hpssacli diag to get results
+       Wrap swiftlm ssacli diag to get results
     """
     # Needs root privileges to run
-    results, slots = hpssacli.get_smart_array_info()
+    results, slots = ssacli.get_smart_array_info()
     if type(results) != list:
         # A single metric can be emitted in some cases:
         # <class 'swiftlm.utils.metricdata.MetricData'>
-        # swiftlm.hp_hardware.hpssacli.smart_array failed with: \
-        #     flock: failed to execute hpssacli: Permission denied
+        # swiftlm.hp_hardware.ssacli.smart_array failed with: \
+        #     flock: failed to execute ssacli: Permission denied
         results = [results]
     for slot in slots:
-        results.extend(hpssacli.get_physical_drive_info(slot))
-        results.extend(hpssacli.get_logical_drive_info(slot, cache_check=True))
+        results.extend(ssacli.get_physical_drive_info(slot))
+        results.extend(ssacli.get_logical_drive_info(slot, cache_check=True))
     for result in results:
         # where possible change the service strings
         result.name = result.name.replace('swift', 'cinder')
@@ -169,7 +173,9 @@ def main():
     if args.cinder_capacity:
         results.extend(get_capacity())
     if args.hpssacli:
-        results.extend(check_hpssacli())
+        results.extend(check_ssacli())
+    if args.ssacli:
+        results.extend(check_ssacli())
     if args.json:
         print(json.dumps(results, sort_keys=True, indent=4))
     else:
