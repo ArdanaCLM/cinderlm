@@ -18,3 +18,13 @@ under the License.
 # cinderlm - Cinder Lifecycle Managment
 
 Cinder diagnostic scripts.
+
+
+HPE SSA
+-------
+
+The HPE Smart Storage Administrator (HPE SSA) CLI component will have to be
+installed for SSACLI status to be reported. To download and install the
+SSACLI utility to enable management of disk controllers, please refer
+to
+[HPE SSA site](https://support.hpe.com/hpsc/swd/public/detail?swItemId=MTX_3d16386b418a443388c18da82f)
